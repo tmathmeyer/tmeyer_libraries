@@ -4,8 +4,16 @@
   <property name="build.dir" location="build" />
   <property name="dist.dir" location="dist" />
   <property name="docs.dir" location="docs" />
+  <property name="lib.storage.windows" location="D:\builds\java\lib" />
+  <property name="lib.storage.linux" location="/home/pi/Builds/auto/lib" />
 
-  <property name="lib.storage" location="D:\builds\java\lib" />
+  <condition property="isWindows">
+    <os family="windows" />
+  </condition>
+
+  <condition property="isLinux">
+    <os family="unix" />
+  </condition>
 
   <!-- Deletes the existing build, docs and dist directory-->
   <target name="clean">
@@ -29,14 +37,28 @@
   </target>
 
   <!-- Creates Javadoc -->
-  <target name="docs" depends="compile">
+  <target name="docs.windows" depends="compile">
     <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
       <!-- Define which files / directory should get included, we include all -->
        <fileset dir="${src.dir}">
                 <include name="**" />
            </fileset>
     </javadoc>
-    <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${lib.storage}\docs">
+    <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${lib.storage.windows}\docs">
+      <!-- Define which files / directory should get included, we include all -->
+       <fileset dir="${src.dir}">
+                <include name="**" />
+           </fileset>
+    </javadoc>
+  </target>
+  <target name="docs.linux" depends="compile">
+    <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+      <!-- Define which files / directory should get included, we include all -->
+       <fileset dir="${src.dir}">
+                <include name="**" />
+           </fileset>
+    </javadoc>
+    <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${lib.storage.linux}\docs">
       <!-- Define which files / directory should get included, we include all -->
        <fileset dir="${src.dir}">
                 <include name="**" />
@@ -45,12 +67,16 @@
   </target>
 
   <!--Creates the deployable jar file  -->
-  <target name="jar" depends="compile">
+  <target name="jar.windows" depends="compile">
     <jar destfile="${dist.dir}\lib.ant.jar" basedir="${build.dir}"></jar>
-    <jar destfile="${lib.storage}\lib-1.0.0.ant.jar" basedir="${build.dir}"></jar>
+    <jar destfile="${lib.storage.windows}\lib-1.0.0.ant.jar" basedir="${build.dir}"></jar>
+  </target>
+  <target name="jar.linux" depends="compile">
+    <jar destfile="${dist.dir}\lib.ant.jar" basedir="${build.dir}"></jar>
+    <jar destfile="${lib.storage.linux}\lib-1.0.0.ant.jar" basedir="${build.dir}"></jar>
   </target>
 
-  <target name="main" depends="compile, jar, docs">
+  <target name="main" depends="compile, jar.windows, jar.linux, docs.windows, docs.linux">
     <description>Main target</description>
   </target>
 
