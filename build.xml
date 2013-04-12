@@ -58,12 +58,6 @@
                 <include name="**" />
            </fileset>
     </javadoc>
-    <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${lib.storage.linux}\docs">
-      <!-- Define which files / directory should get included, we include all -->
-       <fileset dir="${src.dir}">
-                <include name="**" />
-           </fileset>
-    </javadoc>
   </target>
 
   <!--Creates the deployable jar file  -->
