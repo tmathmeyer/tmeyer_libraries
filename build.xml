@@ -37,7 +37,7 @@
   </target>
 
   <!-- Creates Javadoc -->
-  <target name="docs.windows" depends="compile">
+  <target name="docs.windows" depends="compile" if="isWindows">
     <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
       <!-- Define which files / directory should get included, we include all -->
        <fileset dir="${src.dir}">
@@ -51,7 +51,7 @@
            </fileset>
     </javadoc>
   </target>
-  <target name="docs.linux" depends="compile">
+  <target name="docs.linux" depends="compile" if="isLinux">
     <javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
       <!-- Define which files / directory should get included, we include all -->
        <fileset dir="${src.dir}">
@@ -67,11 +67,11 @@
   </target>
 
   <!--Creates the deployable jar file  -->
-  <target name="jar.windows" depends="compile">
+  <target name="jar.windows" depends="compile" if="isWindows">
     <jar destfile="${dist.dir}\lib.ant.jar" basedir="${build.dir}"></jar>
     <jar destfile="${lib.storage.windows}\lib-1.0.0.ant.jar" basedir="${build.dir}"></jar>
   </target>
-  <target name="jar.linux" depends="compile">
+  <target name="jar.linux" depends="compile" if="isLinux">
     <jar destfile="${dist.dir}\lib.ant.jar" basedir="${build.dir}"></jar>
     <jar destfile="${lib.storage.linux}\lib-1.0.0.ant.jar" basedir="${build.dir}"></jar>
   </target>
