@@ -7,8 +7,7 @@ public interface Heap<E extends Comparable<E>>{
 	/**
 	 * Sets the new maximum size for this heap.
 	 * 
-	 * @param size sets the new maximum heap size. 
-	 * @return 
+	 * @param size sets the new maximum heap size.
 	 * @exception HeapSizeException if the new size is negative, or less than the current number of elements in the array, an exception will be thrown
 	 */
 	public void setMaxHeapSize(int size) throws HeapSizeException;
