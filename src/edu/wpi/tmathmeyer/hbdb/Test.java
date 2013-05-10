@@ -26,14 +26,15 @@ public class Test {
 	 * 
 	 */
 	public static void main(String[] args){
-		HomeBase db = HomeBase.getInstance("tableu", "D:/databases");
+		HomeBase db = HomeBase.getInstance("NRPServerDatabase", "D:/databases");
 		try {
-
-			System.out.println(db.query("{function:maketable; callID:maketable1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, JSON-STATUS}}"));
-	 		System.out.println(db.query("{function:insert; callID:normalinsertion1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, thisIsASampleMethodCall}}"));
-	 		System.out.println(db.query("{function:overwrite; callID:overwriteinsertion1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, thisIsANewMethod}}"));
-	 		System.out.println(db.query("{function:get; callID:get1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL}}"));
-	 		System.out.println(db.query("{function:get; callID:get2; params:{JSON-table, JSON-ID, JSON-STATUS}}"));
+			System.out.println(db.query("{function:maketable; callID:startup; params:{users, acctname, hashedPassword, lastlogin, creationdate, statusmessage}}"));
+			System.out.println(db.query("{function:get; callID:getPassword; params:{users, "+"tmathmeyer"+", hashedPassword}}"));
+			//System.out.println(db.query("{function:maketable; callID:maketable1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, JSON-STATUS}}"));
+	 		//System.out.println(db.query("{function:insert; callID:normalinsertion1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, thisIsASampleMethodCall}}"));
+	 		//System.out.println(db.query("{function:overwrite; callID:overwriteinsertion1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, thisIsANewMethod}}"));
+	 		//System.out.println(db.query("{function:get; callID:get1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL}}"));
+	 		//System.out.println(db.query("{function:get; callID:get2; params:{JSON-table, JSON-ID, JSON-STATUS}}"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

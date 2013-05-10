@@ -84,7 +84,7 @@ public class HomeBase {
 			String result = (String) func.invoke(this, indiParams);
 			return "{function:"+FUNCTION_NAME+", callID:"+CALL_ID+", result:{"+result+"}}";
 		} catch (Exception e) {
-			return "{function:"+FUNCTION_NAME+", callID:"+CALL_ID+", result:{FAILURE, "+e.getMessage()+"}}";
+			return "{function:"+FUNCTION_NAME+", callID:"+CALL_ID+", result:{FAILURE, "+e.toString()+"}}";
 		}
 	}
 	
@@ -196,7 +196,7 @@ public class HomeBase {
 		table.mkdirs();
 		File raf = new File(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/.dex");
 		if (raf.exists())
-			throw new DatabaseException();
+			return "table exists";
 		raf.createNewFile();
 		FileWriter fw = new FileWriter(raf.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
