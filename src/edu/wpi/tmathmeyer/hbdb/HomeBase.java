@@ -136,7 +136,6 @@ public class HomeBase {
 					values[colNumber-1] = args[3];
 					for(int i = 0; i < values.length; i++){
 						out.write(values[i]+(i==values.length-1?"":","));
-						System.out.print(values[i]+(i==values.length-1?"":","));
 					}
 					out.close();
 					return "SUCCESS, database written successfully";
