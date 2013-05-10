@@ -112,27 +112,27 @@ public class HomeBase {
 	 */
 	private String put(String[] args, boolean force) throws Exception{
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/.dex"));
+			BufferedReader br = new BufferedReader(new FileReader(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/.dex"));
 			String[] tableHeaders = br.readLine().split(",");
 			br.close();
 			int colNumber = -1;
 			for(int i = 1; i < tableHeaders.length; i++)
 				colNumber = tableHeaders[i].equals(args[2])?i:colNumber;
 			try{
-				File f = new File(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
+				File f = new File(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
 				if (f.exists());
 				else{
 					f.createNewFile();
-					FileWriter out = new FileWriter(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
+					FileWriter out = new FileWriter(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
 					for(int i = 0; i < tableHeaders.length-1; i++)out.write(i==tableHeaders.length-2?" ":" ,");
 					out.close();
 				}
-				br = new BufferedReader(new FileReader(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/."+args[1]));
+				br = new BufferedReader(new FileReader(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/."+args[1]));
 				String line = br.readLine();
 				line = line==null?"":line;
 				String[] values = line.split(",");
 				if (values[colNumber-1].equals(" ") || force){
-					FileWriter out = new FileWriter(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
+					FileWriter out = new FileWriter(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/."+args[1]);
 					values[colNumber-1] = args[3];
 					for(int i = 0; i < values.length; i++){
 						out.write(values[i]+(i==values.length-1?"":","));
@@ -161,7 +161,7 @@ public class HomeBase {
 	public String get(String[] args) throws Exception{
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/.dex"));
+			br = new BufferedReader(new FileReader(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/.dex"));
 			String[] tableHeaders = br.readLine().split(",");
 			br.close();
 
@@ -171,7 +171,7 @@ public class HomeBase {
 					colNumber = i;
 			
 			try{
-				br = new BufferedReader(new FileReader(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/."+args[1]));
+				br = new BufferedReader(new FileReader(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/."+args[1]));
 				String[] values = br.readLine().split(",");
 				return "SUCCESS, "+(values[colNumber-1].equals("")?null:values[colNumber-1]);
 			}
@@ -192,9 +192,9 @@ public class HomeBase {
 	 * @throws IOException 
 	 */
 	public String maketable(String[] args) throws DatabaseException, IOException{
-		File table = new File(this.filePath+"."+this.databaseName+"/.table-"+args[0]);
+		File table = new File(this.filePath+"/."+this.databaseName+"/.table-"+args[0]);
 		table.mkdirs();
-		File raf = new File(this.filePath+"."+this.databaseName+"/.table-"+args[0]+"/.dex");
+		File raf = new File(this.filePath+"/."+this.databaseName+"/.table-"+args[0]+"/.dex");
 		if (raf.exists())
 			throw new DatabaseException();
 		raf.createNewFile();

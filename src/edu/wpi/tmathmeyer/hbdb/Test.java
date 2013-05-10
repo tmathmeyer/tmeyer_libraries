@@ -26,7 +26,7 @@ public class Test {
 	 * 
 	 */
 	public static void main(String[] args){
-		HomeBase db = HomeBase.getInstance("tableu", "D:/");
+		HomeBase db = HomeBase.getInstance("tableu", "D:/databases");
 		try {
 
 			System.out.println(db.query("{function:maketable; callID:maketable1; params:{JSON-table, JSON-ID, JSON-FUNCTION-CALL, JSON-STATUS}}"));
